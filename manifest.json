@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub PR Approver",
+  "version": "1.0",
+  "description": "Approve GitHub PRs on invitae-internal with one shortcut or button.",
+  "permissions": ["scripting", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/invitae-internal/*/pull/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "commands": {
+    "approve_pr": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Approve current PR"
+    }
+  },
+  "icons": {
+    "128": "app128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
