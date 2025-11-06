@@ -26,15 +26,17 @@ async function approvePR() {
   await clickSelector('a[href$="/files"]')
 
   // Step 2: Click Review Changes button
-  await clickSelector('button[class="js-review-changes"]');
+  const reviewBtn = Array.from(document.querySelectorAll('span'))
+	.find(el => el.textContent.trim() === "Submit review");
+  await clickElement(reviewBtn)
 
   // Step 3: Select "Approve"
-  await clickSelector('input[name="pull_request_review[event]"][value="approve"]');
+  await clickSelector('input[value="approve"]');
 
   // Step 4: Click Submit review
-  const el = Array.from(document.querySelectorAll('span'))
-	.find(span => span.textContent.trim() === "Submit review");
-  await clickElement(el)
+  const submitBtn = Array.from(document.querySelectorAll('div'))
+	.find(el => el.textContent.trim() === "Submit review");
+  await clickElement(submitBtn)
 
   console.log("✅ PR approved (if permissions allowed).");
 }
